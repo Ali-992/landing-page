@@ -26,6 +26,7 @@ const myButton = document.getElementById("myBtn");
  * Start Helper Functions
  *
 */
+//create list items 
 function createListItems(){
   for (var section of sections) {
     //getting section name
