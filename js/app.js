@@ -27,16 +27,7 @@ const myButton = document.getElementById("myBtn");
  * 
 */
 
-//when section is in view port
-const sectionInViewPort = (section) => {
-  let sectionPostion = section.getBoundingClientRect();
-  return (sectionPostion.top >=0); }
 
-//when section is not in view port
-
-  const sectionNotInViewPort = (section) => {
-    let sectionPostion = section.getBoundingClientRect();
-    return (sectionPostion.top >=! 0); }
 /**
  * End Helper Functions
  * Begin Main Functions
@@ -59,6 +50,17 @@ function createListItems (){
     navMenu.append(listItem);
   }
 }
+
+//when section is in view port
+const sectionInViewPort = (section) => {
+  let sectionPostion = section.getBoundingClientRect();
+  return (sectionPostion.top >=0); }
+
+//when section is not in view port
+
+  const sectionNotInViewPort = (section) => {
+    let sectionPostion = section.getBoundingClientRect();
+    return (sectionPostion.top >= 200); }
 
 // Add class 'active' to section when near top of viewport
 function addActiveSection(){
