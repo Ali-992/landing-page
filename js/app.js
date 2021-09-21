@@ -1,21 +1,21 @@
 /**
- *
+ * 
  * Manipulating the DOM exercise.
  * Exercise programmatically builds navigation,
  * scrolls to anchors from navigation,
  * and highlights section in viewport upon scrolling.
- *
+ * 
  * Dependencies: None
- *
+ * 
  * JS Version: ES2015/ES6
- *
+ * 
  * JS Standard: ESlint
- *
+ * 
 */
 
 /**
  * Define Global Variables
- *
+ * 
 */
 const sections = document.querySelectorAll('section');
 const navMenu = document.getElementById('navbar__list');
@@ -24,10 +24,27 @@ const myButton = document.getElementById("myBtn");
 /**
  * End Global Variables
  * Start Helper Functions
- *
+ * 
 */
-function createListItems(){
-  for (var section of sections) {
+
+//when section is in view port
+const sectionInViewPort = (section) => {
+  let sectionPostion = section.getBoundingClientRect();
+  return (sectionPostion.top >=0); }
+//when section is not in view port
+  const sectionNotInViewPort = (section) => {
+    let sectionPostion = section.getBoundingClientRect();
+    return (sectionPostion.top >=! 0); }
+/**
+ * End Helper Functions
+ * Begin Main Functions
+ * 
+*/
+
+// build the nav
+
+function createListItems (){
+  for (const section of sections) {
     //getting section name
     sectionName = section.getAttribute('data-nav');
     //getting section id
@@ -41,40 +58,44 @@ function createListItems(){
   }
 }
 
-// using the getBoundingClientRect to insure that section in view port and getting the largest value by using the Math.floor
-const offset = (section) => {
-  return Math.floor(section.getBoundingClientRect().top);
-};
+// Add class 'active' to section when near top of viewport
+function addActiveSection(){
+  for (const section of sections) {
+    //if section in viewport
+    if (sectionInViewPort(section)) {
+      //and doesn't have the class
+      if(!section.classList.contains('your-active-class')){
+        //then add it
+        section.classList.add('your-active-class');
+      } 
+    } else {
+      //else remove the class
+      section.classList.remove('your-active-class');
+    }
+    //removes the class when you scroll to top of the page
+    if(sectionNotInViewPort(section)) {
+      section.classList.remove('your-active-class');
+    }
+  }
+}
 
-// remove the active class
-const removeActive = (section) => {
-  section.classList.remove('your-active-class');
-  section.style.cssText = "background-color: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%)";
-};
-// adding the active class
-const addActive = (conditional, section) => {
-  if(conditional){
-      section.classList.add('your-active-class');
-      section.style.cssText = "background-color: amber;";
-  };
-};
+// Scroll to anchor ID using scrollTO event
 
-//implementating the toggle function
 
-const toggleSectionActivation = () => {
-  sections.forEach(section => {
-      const elementOffset = offset(section);
+/**
+ * End Main Functions
+ * Begin Events
+ * 
+*/
 
-      inviewport = () => elementOffset < 200 && elementOffset >= -200;
+// Build menu 
+createListItems();
+// Scroll to section on link click
 
-      removeActive(section);
-      addActive(inviewport(),section);
-  });
-};
+// Set sections as active
+document.addEventListener('scroll', addActiveSection);
 
-window.addEventListener('scroll' ,toggleSectionActivation);
-
-// When the user scrolls down 40px from the top of the document, show the button
+//button
 window.onscroll = function() {scrollFunction()};
 
 function scrollFunction() {
@@ -89,7 +110,3 @@ function scrollFunction() {
 function goToTopFunction() {
   document.body.scrollTop = 0;
 }
-  
-
-// build the nav
-createListItems();
