@@ -31,7 +31,9 @@ const myButton = document.getElementById("myBtn");
 const sectionInViewPort = (section) => {
   let sectionPostion = section.getBoundingClientRect();
   return (sectionPostion.top >=0); }
+
 //when section is not in view port
+
   const sectionNotInViewPort = (section) => {
     let sectionPostion = section.getBoundingClientRect();
     return (sectionPostion.top >=! 0); }
