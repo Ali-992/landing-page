@@ -26,6 +26,7 @@ const myButton = document.getElementById("myBtn");
  * Start Helper Functions
  * 
 */
+<<<<<<< HEAD
 
 //when section is in view port
 const sectionInViewPort = (section) => {
@@ -45,6 +46,11 @@ const sectionInViewPort = (section) => {
 
 function createListItems (){
   for (const section of sections) {
+=======
+//create list items 
+function createListItems(){
+  for (var section of sections) {
+>>>>>>> 5ceff8526c8fe5a7832d6bba005099fad9568374
     //getting section name
     sectionName = section.getAttribute('data-nav');
     //getting section id
