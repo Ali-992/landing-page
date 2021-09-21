@@ -80,6 +80,7 @@ function addActiveSection(){
     if(sectionNotInViewPort(section)) {
       section.classList.remove('your-active-class');
     }
+    
   }
 }
 
